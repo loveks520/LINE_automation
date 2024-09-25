@@ -36,9 +36,11 @@ ext_path = glob.glob(ext_path)
 if not ext_path:
     webbrowser.get(chrome_path).open("https://chrome.google.com/webstore/detail/line/ophjlpahpchlmihnnnihgmmeilfjmjjc?hl=zh-TW")
 else:
-    chrome_option.add_argument("--load-extension=" + ext_path[-1])
-#    browser = Chrome(options=chrome_option)
-
+    print(ext_path[-1])
+    #chrome_option.add_argument("--load-extension=" + ext_path[-1])
+    #browser = Chrome(options=chrome_option)
+chrome_option.add_argument('--ignore-certificate-errors')
+chrome_option.add_argument('--ssl-client-certificate-file=' + 'C:\\Users\\willchen\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\ophjlpahpchlmihnnnihgmmeilfjmjjc\\3.5.1_0.pem')
 idle_time = 0
 chrome_option.add_extension("C:\\Users\\willchen\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\ophjlpahpchlmihnnnihgmmeilfjmjjc\\3.5.1_0.crx")
 
