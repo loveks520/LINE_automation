@@ -18,29 +18,37 @@ TEXT = "驗證碼："
 mail = MIMEMultipart('alternative')
 mail['From'] = stu_user
 mail['Subject'] = "LINE自動請求"
-server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-server.ehlo()
-server.login(stu_user, stu_passwd)
+#server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+#server.ehlo()
+#server.login(stu_user, stu_passwd)
 
 jquery = r'$("#_chat_room_input").text(arguments[0])'
 chrome_option = Options()
 # chrome_option.add_argument('--headless')
 ext_path = "/Default/Extensions/ophjlpahpchlmihnnnihgmmeilfjmjjc/*"
 chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
-
+#C:\Users\willchen\AppData\Local\Google\Chrome\User Data\Default\Extensions\ophjlpahpchlmihnnnihgmmeilfjmjjc
 if platform.system() == 'Linux':
     ext_path = os.environ['HOME'] + "/.config/google-chrome"+ext_path if os.path.exists(os.environ['HOME']+"/.config/google-chrome") else os.environ['HOME'] + "/.config/chromium"+ext_path
 else:
     ext_path = os.environ['LOCALAPPDATA'] + r"\Google\Chrome\User Data"+ext_path
 ext_path = glob.glob(ext_path)
 if not ext_path:
-    webbrowser.get(chrome_path).open("https://chrome.google.com/webstore/detail/line/ophjlpahpchlmihnnnihgmmeilfjmjjc?hl=en")
+    webbrowser.get(chrome_path).open("https://chrome.google.com/webstore/detail/line/ophjlpahpchlmihnnnihgmmeilfjmjjc?hl=zh-TW")
 else:
     chrome_option.add_argument("--load-extension=" + ext_path[-1])
-    browser = Chrome(chrome_options=chrome_option)
+#    browser = Chrome(options=chrome_option)
 
 idle_time = 0
-# chrome_option.add_extension("extension_2_1_4_0.crx")
+chrome_option.add_extension("C:\\Users\\willchen\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\ophjlpahpchlmihnnnihgmmeilfjmjjc\\3.5.1_0.crx")
+
+user_agent = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) " +
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"
+    )
+
+chrome_option.add_argument('user-agent=%s'%user_agent)
+browser = Chrome(options=chrome_option)
 
 
 def choose_room(room):
@@ -134,9 +142,9 @@ def login(username, pwd, email=None):
 
     # sent LINE validation code to smartphone
     # mail['Subject'] = SUBJECT+element.text
-    mail['To'] = email
-    mail.attach(MIMEText(TEXT+element.text, 'plain'))
-    server.sendmail(stu_user, mail['To'], mail.as_string())
+    #mail['To'] = email
+    #mail.attach(MIMEText(TEXT+element.text, 'plain'))
+    #server.sendmail(stu_user, mail['To'], mail.as_string())
     print('email sent')
     server.quit()
 
@@ -163,4 +171,3 @@ if __name__ == "__main__":
         # text = has_new()
         # if text:
         #     print(text)
-
