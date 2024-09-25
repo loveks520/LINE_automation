@@ -131,22 +131,20 @@ def login(username, pwd, email=None):
         email = username
     browser.get("chrome-extension://ophjlpahpchlmihnnnihgmmeilfjmjjc/index.html"
     )
-    element = WebDriverWait(browser, 99).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "#line_login_email")))
+    time.sleep(5)
+    element = WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.NAME, "email")))
+    element.send_keys('Python_user')
+    element = WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.NAME, "password")))
+    element.send_keys('Python_pwd')
 
-    element.send_keys(username+Keys.TAB+pwd+Keys.ENTER)
-    # browser.find_element_by_id("line_login_pwd").send_keys("wuorsut")
-    # browser.find_element_by_id("login_btn").send_keys(Keys.ENTER)
-    element = WebDriverWait(browser, 99).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "mdCMN01Code")))
 
-    # sent LINE validation code to smartphone
-    # mail['Subject'] = SUBJECT+element.text
-    #mail['To'] = email
-    #mail.attach(MIMEText(TEXT+element.text, 'plain'))
-    #server.sendmail(stu_user, mail['To'], mail.as_string())
-    print('email sent')
-    server.quit()
+    element = WebDriverWait(browser, 99).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'loginForm-module__button_login__gnKsN')))
+    element.click()
+    # sent LINE login submit
+
 
 
 if __name__ == "__main__":
